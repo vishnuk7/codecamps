@@ -1,36 +1,16 @@
 const express = require("express");
 const dotenv = require("dotenv");
 
+//Route file
+const codecampsRouter = require("./routes/codecamps");
+
 //load env vars
 dotenv.config({ path: "./config/config.env" });
 
 const app = express();
 
-app.get("/api/v1/codecamps", (req, res, next) => {
-  res.status(200).json({ success: true, msg: `Show all bootcamps` });
-});
-
-app.get("/api/v1/codecamps/:id", (req, res, next) => {
-  res
-    .status(200)
-    .json({ success: true, msg: `Show bootcamp ${req.params.id}` });
-});
-
-app.post("/api/v1/codecamps/:id", (req, res, next) => {
-  res.status(200).json({ success: true, msg: `Create new bootcamp` });
-});
-
-app.put("/api/v1/codecamps/:id", (req, res, next) => {
-  res
-    .status(200)
-    .json({ success: true, msg: `Update bootcamp ${req.params.id}` });
-});
-
-app.delete("/api/v1/codecamps/:id", (req, res, next) => {
-  res
-    .status(200)
-    .json({ success: true, msg: `Delete bootcamp ${req.params.id}` });
-});
+//mount routers
+app.use("/api/v1/codecamps", codecampsRouter);
 
 const PORT = process.env.PORT || 5000;
 
