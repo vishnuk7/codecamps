@@ -2,11 +2,15 @@ const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
 
+const connectDB = require("./config/db");
 //Route file
 const codecampsRouter = require("./routes/codecamps");
 
 //load env vars
 dotenv.config({ path: "./config/config.env" });
+
+//connect to database
+connectDB();
 
 const app = express();
 
