@@ -19,7 +19,14 @@ exports.getCodecamp = (req, res, next) => {
 //@desc Create codecamps
 //@route POST /api/v1/codecamps/:id
 //@access Public
-exports.postCodecamp = (req, res, next) => {};
+exports.postCodecamp = async (req, res, next) => {
+  const bootcamp = await Bootcamp.create(req.body);
+
+  res.status(201).json({
+    success: true,
+    data: bootcamp,
+  });
+};
 
 //@desc Update codecamps
 //@route PUT /api/v1/codecamps/:id
