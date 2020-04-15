@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const morgan = require("morgan");
+const chalk = require("chalk");
 
 const connectDB = require("./config/db");
 //Route file
@@ -24,14 +25,16 @@ app.use("/api/v1/codecamps", codecampsRouter);
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(
+const server = app.listen(
   PORT,
-  console.log(`Server runing in ${process.env.NODE_ENV} mode on port ${PORT}`)
+  console.log(
+    chalk`{yellow.bold.underline Server runing in ${process.env.NODE_ENV} mode on port ${PORT}}`
+  )
 );
 
 //handle unhandled promise rejection
 process.on("unhandledRejection", (err, promise) => {
-  console.log(`Error: ${err.message}`);
+  console.log(chalk`{bgRed Error: ${err.message} }`);
   //close server & exit process
   server.close(() => process.exit(1));
 });
