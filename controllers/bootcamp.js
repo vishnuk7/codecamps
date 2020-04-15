@@ -1,3 +1,5 @@
+const Bootcamp = require("../model/Bootcamp");
+
 //@desc Get all codecamps
 //@route GET /api/v1/codecamps
 //@access Public
@@ -17,9 +19,7 @@ exports.getCodecamp = (req, res, next) => {
 //@desc Create codecamps
 //@route POST /api/v1/codecamps/:id
 //@access Public
-exports.postCodecamp = (req, res, next) => {
-  res.status(200).json({ success: true, msg: `Create new bootcamp` });
-};
+exports.postCodecamp = (req, res, next) => {};
 
 //@desc Update codecamps
 //@route PUT /api/v1/codecamps/:id
