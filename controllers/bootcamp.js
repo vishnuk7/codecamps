@@ -60,9 +60,24 @@ exports.postCodecamp = async (req, res, next) => {
 //@route PUT /api/v1/codecamps/:id
 //@access Public
 exports.putCodecamp = (req, res, next) => {
-  res
-    .status(200)
-    .json({ success: true, msg: `Update bootcamp ${req.params.id}` });
+  Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  })
+    .then((bootcamp) => {
+      if (!bootcamp) {
+        throw "err";
+      }
+      res.status(200).json({
+        success: true,
+        data: bootcamp,
+      });
+    })
+    .catch((err) => {
+      res.status(400).json({
+        success: false,
+      });
+    });
 };
 
 //@desc Delete codecamps
