@@ -59,25 +59,27 @@ exports.postCodecamp = async (req, res, next) => {
 //@desc Update codecamps
 //@route PUT /api/v1/codecamps/:id
 //@access Public
-exports.putCodecamp = (req, res, next) => {
-  Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  })
-    .then((bootcamp) => {
-      if (!bootcamp) {
-        throw "err";
-      }
-      res.status(200).json({
-        success: true,
-        data: bootcamp,
-      });
-    })
-    .catch((err) => {
-      res.status(400).json({
+exports.putCodecamp = async (req, res, next) => {
+  try {
+    const bootcamp = await Bootcamp.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    if (!bootcamp) {
+      return res.status(400).json({
         success: false,
       });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: bootcamp,
     });
+  } catch (err) {
+    res.status(400).json({
+      success: false,
+    });
+  }
 };
 
 //@desc Delete codecamps
