@@ -7,12 +7,19 @@ const errorHandler = (err, req, res, next) => {
   error.message = err.message;
 
   //Log to console for dev
-  console.log(chalk`{red.bold ${err.stack}}`);
+  console.log(err);
+  // console.log(chalk`{red.bold ${err.stack}}`);
 
   //Mongoose bad object id
   if (err.name == "CastError") {
     const message = `Resource not found with id of ${req.params.id}`;
     error = new ErrorResponese(message, 404);
+  }
+
+  //Mongoose duplicate key
+  if (err.code === 11000) {
+    const message = `Duplicate field value entered`;
+    error = new ErrorResponese(message, 400);
   }
 
   res.status(error.statusCode || 500).json({
