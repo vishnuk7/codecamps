@@ -22,6 +22,12 @@ const errorHandler = (err, req, res, next) => {
     error = new ErrorResponese(message, 400);
   }
 
+  //Mongoose validation code
+  if (err.name === "ValidationError") {
+    const message = Object.values(err.errors).map((val) => val.message);
+    error = new ErrorResponese(message, 400);
+  }
+
   res.status(error.statusCode || 500).json({
     success: false,
     error: error.message || "Sever Error",
