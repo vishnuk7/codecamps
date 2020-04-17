@@ -4,7 +4,7 @@ const errorHandler = (err, req, res, next) => {
   //Log to console for dev
   console.log(chalk`{red.bold ${err.stack}}`);
 
-  res.status(500).json({
+  res.status(err.statusCode || 500).json({
     success: false,
     error: err.message,
   });
