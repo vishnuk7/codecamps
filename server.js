@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const chalk = require("chalk");
 
+const errorHandler = require("./middleware/err");
 const connectDB = require("./config/db");
 //Route file
 const codecampsRouter = require("./routes/codecamps");
@@ -26,6 +27,7 @@ if (process.env.NODE_ENV === "development") {
 //mount routers
 app.use("/api/v1/codecamps", codecampsRouter);
 
+app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
 
 const server = app.listen(
