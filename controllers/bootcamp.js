@@ -33,7 +33,7 @@ exports.getCodecamp = asyncHandler(async (req, res, next) => {
 });
 
 //@desc Create codecamps
-//@route POST /api/v1/codecamps/:id
+//@route POST /api/v1/codecamps/
 //@access Public
 exports.postCodecamp = asyncHandler(async (req, res, next) => {
   const bootcamp = await Bootcamp.create(req.body);
