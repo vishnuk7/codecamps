@@ -112,6 +112,10 @@ BootcampSchema.pre("save", async function (next) {
     zipcode: loc[0].zipcode,
     country: loc[0].countryCode,
   };
+
+  //Do save address in DB
+  this.address = undefined;
+  next();
 });
 
 module.exports = mongoose.model("Bootcamp", BootcampSchema);
