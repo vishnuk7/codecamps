@@ -51,6 +51,7 @@ exports.getCodecamps = asyncHandler(async (req, res, next) => {
   const skip = (page - 1) * limit;
 
   query = query.skip(skip).limit(limit);
+  
   //Executing resource
   const bootcamp = await query;
 
