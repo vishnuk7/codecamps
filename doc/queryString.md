@@ -64,9 +64,9 @@ In above query string if try to find the fields (name,averageCost) it treat **se
 
 1. First exclude select from query string
 2. Second run excluded query string which is going to pass in **find()** method
-3. To select specific filed from database mongoose provide a method which make it easier and that method is **<span style="color:#3742fa">select()</span>** [to more]("https://mongoosejs.com/docs/queries.html")
+3. To select specific filed from database mongoose provide a method which make it easier and that method is **<span style="color:#3742fa">select()</span>** [to more](https://mongoosejs.com/docs/queries.html)
 
-> To get the code about this [select field]("https://github.com/vishnuk7/codecamps/commit/0c8d0b0e40ef1abcdbfe364b8bbd3bdfdebfbf8b")
+> To get the code about this [select field](https://github.com/vishnuk7/codecamps/commit/0c8d0b0e40ef1abcdbfe364b8bbd3bdfdebfbf8b)
 
 > ❗ select() only aspect arguments with space
 
