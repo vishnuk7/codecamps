@@ -10,15 +10,24 @@ const geocoder = require("../util/geocoder");
 exports.getCodecamps = asyncHandler(async (req, res, next) => {
   let query;
 
+  //Copy req.query
+  const copyQuery = { ...req.query };
+
+  //Create query string
   let queryStr = JSON.stringify(req.query);
+
+  //Create operators ($gt,$lte,$lt)
   queryStr = queryStr.replace(
     /\b(gt|gte|lt|lte|in)\b/g,
     (match) => `$${match}`
   );
 
+  //Finding resource
   query = Bootcamp.find(JSON.parse(queryStr));
 
+  //Executing resource
   const bootcamp = await query;
+
   res.status(200).json({
     success: true,
     count: bootcamp.length,
