@@ -2,24 +2,25 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
 const dotenv = require("dotenv");
+const path = require("path");
 
 //Load env vars
 dotenv.config({ path: "./config/config.env" });
 
 //Load models
-const Bootcamp = require("./models/Bootcamp");
+const Bootcamp = require("./model/Bootcamp");
 
 // connect to DB
 mongoose.connect(process.env.MONGO_URI, {
-  userNameUrlParser: true,
+  useNewUrlParser: true,
   useCreateIndex: true,
-  userFindAndModify: true,
-  userUnifiedTopology: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,
 });
 
 //Read JSON file
 const boocamps = JSON.parse(
-  fs.readFileSync(`${__dirname}/_data/bootcamps.json)`, "utf-8")
+  fs.readFileSync(`${__dirname}/_data/bootcamps.json`, "utf-8")
 );
 
 // Importing into DB
@@ -37,7 +38,8 @@ const importData = async () => {
 const deleteData = async () => {
   try {
     await Bootcamp.deleteMany();
-    console.log(chalk`{green Data deleted... }`);
+    console.log(chalk`{red Data deleted... }`);
+    process.exit();
   } catch (err) {
     console.log(chalk`{red ${err}}`);
   }
