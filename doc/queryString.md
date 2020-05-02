@@ -81,3 +81,12 @@ Sorting data using query string is quite easy 😃 you just need a mongoose meho
 > http//:localhost:8000/api/v1/codecamps?select=name,averageCost&sort=name
 
 > logic for sorting 🐱 [here](ttps://github.com/vishnuk7/codecamps/commit/ttps://github.com/vishnuk7/codecamps/commit/)
+
+> #### Pagination
+
+Pagination is one of best features of website
+How apps determine page number and it's limits 😕
+Mongoose offer a nice method with the help of that method we can create a pagination logic
+**<span style="color:#3742fa">skip()</span>**
+
+<span style="backgroud-color:#2ed573;color:#fff;">Example</span>
