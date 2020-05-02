@@ -7,6 +7,7 @@ const errorHandler = require("./middleware/err");
 const connectDB = require("./config/db");
 //Route file
 const codecampsRouter = require("./routes/codecamps");
+const couresRouter = require("./routes/coures");
 
 //load env vars
 dotenv.config({ path: "./config/config.env" });
@@ -26,6 +27,7 @@ if (process.env.NODE_ENV === "development") {
 
 //mount routers
 app.use("/api/v1/codecamps", codecampsRouter);
+app.use("/api/v1/coures", couresRouter);
 
 app.use(errorHandler);
 const PORT = process.env.PORT || 5000;
