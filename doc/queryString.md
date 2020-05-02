@@ -80,7 +80,7 @@ Sorting data using query string is quite easy 😃 you just need a mongoose meho
 
 > http//:localhost:8000/api/v1/codecamps?select=name,averageCost&sort=name
 
-> logic for sorting 🐱 [here](ttps://github.com/vishnuk7/codecamps/commit/ttps://github.com/vishnuk7/codecamps/commit/)
+> logic for sorting 🐱 [here](https://github.com/vishnuk7/codecamps/commit/2b6b76cebfa44f03530042fcdc213c328f3025d8)
 
 > #### Pagination
 
@@ -89,4 +89,13 @@ How apps determine page number and it's limits 😕
 Mongoose offer a nice method with the help of that method we can create a pagination logic
 **<span style="color:#3742fa">skip()</span>**
 
-<span style="backgroud-color:#2ed573;color:#fff;">Example</span>
+**<span style="background:#2ed573;color:#fff;padding:10px 12px">Example</span>**
+
+`http://localhost:8000/api/v1/codecamps?page=2&limit=3&select=name,averageCost&sort=name`
+
+In above url there are two query string which have consider for this example `page=2` and `limit=2`
+`page=2` this query string tell as about page number and another one `limit=2` which inform our api how much content should display here `limit` is two so api display only two contents in per page
+
+> code for this [here](https://github.com/vishnuk7/codecamps/commit/2b6b76cebfa44f03530042fcdc213c328f3025d8)
+
+we want save next and previous page information and send with json response so it make frontend work easier 😁 **logic** for this is [here](https://github.com/vishnuk7/codecamps/commit/8d7f58e59033988ef466a2cf10776ed8ec21f7d5)
