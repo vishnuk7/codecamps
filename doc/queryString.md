@@ -73,3 +73,11 @@ In above query string if try to find the fields (name,averageCost) it treat **se
 ```javascript
 Model.select("name averageCost");
 ```
+
+> #### Sorting Data
+
+Sorting data using query string is quite easy 😃 you just need a mongoose mehod know as [**<span style="color:#3742fa">sort()</span>**](https://mongoosejs.com/docs/queries.html)
+
+> http//:localhost:8000/api/v1/codecamps?select=name,averageCost&sort=name
+
+> logic for sorting 🐱 [here](ttps://github.com/vishnuk7/codecamps/commit/ttps://github.com/vishnuk7/codecamps/commit/)

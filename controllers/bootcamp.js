@@ -14,7 +14,7 @@ exports.getCodecamps = asyncHandler(async (req, res, next) => {
   const copyQuery = { ...req.query };
 
   //Fields to exclude
-  const removeFields = ["select", "sort"];
+  const removeFields = ["select", "sort", "page", "limit"];
 
   //Loop over removeFields and delete them from reqQuery
   removeFields.forEach((param) => delete copyQuery[param]);
@@ -39,12 +39,18 @@ exports.getCodecamps = asyncHandler(async (req, res, next) => {
 
   //Sort
   if (req.query.sort) {
-    const sortBy = req.query.split(",").join(" ");
+    const sortBy = req.query.sort.split(",").join(" ");
     query = query.sort(sortBy);
   } else {
     query = query.sort("-createdAt");
   }
 
+  //Pagination
+  const page = parseInt(req.query.page, 10) || 1;
+  const limit = parseInt(req.query.limit, 10) || 100;
+  const skip = (page - 1) * limit;
+
+  query = query.skip(skip).limit(limit);
   //Executing resource
   const bootcamp = await query;
 
