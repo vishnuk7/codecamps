@@ -13,8 +13,14 @@ exports.getCodecamps = asyncHandler(async (req, res, next) => {
   //Copy req.query
   const copyQuery = { ...req.query };
 
+  //Fields to exclude
+  const removeFields = ["select"];
+
+  //Loop over removeFields and delete them from reqQuery
+  removeFields.forEach((param) => delete copyQuery[param]);
+
   //Create query string
-  let queryStr = JSON.stringify(req.query);
+  let queryStr = JSON.stringify(copyQuery);
 
   //Create operators ($gt,$lte,$lt)
   queryStr = queryStr.replace(
@@ -24,6 +30,12 @@ exports.getCodecamps = asyncHandler(async (req, res, next) => {
 
   //Finding resource
   query = Bootcamp.find(JSON.parse(queryStr));
+
+  //Select Fields
+  if (req.query.select) {
+    const fields = req.query.select.split(",").join(" ");
+    query = query.select(fields);
+  }
 
   //Executing resource
   const bootcamp = await query;
