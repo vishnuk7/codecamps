@@ -36,3 +36,23 @@ const router = express.Router({ mergeParams: true });
 ```
 
 We have to pass an object with property of mergeParams with the boolean value `true` in `Router()` method
+
+#### Populate Method
+
+populate() function in mongoose is used for populating
+the data inside the reference.
+
+```javascript
+query = Model.find().populate(CollectionName);
+```
+
+In above code your are populating with entire collection but if you want a specfic document then how you can do it 😕. Yep, there is way 🚀
+
+```javascript
+query = Model.find().populate({
+  path: "Collection Name",
+  select: "field name1, field name2",
+});
+```
+
+Can you guess what above code is doing?Yep! you are correct we are populating with specific fields
