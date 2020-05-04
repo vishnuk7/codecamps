@@ -62,3 +62,19 @@ Can you guess what above code is doing?Yep! you are correct we are populating wi
 In Mongoose, a virtual is a property that is not stored in MongoDB. Virtuals are typically used for computed properties on documents.
 
 code for virtuals [here](https://github.com/vishnuk7/codecamps/commit/8f5c305bff284596f7d3f6447d9bcfaaad2a892b)
+
+#### Cascade delete coures when a bootcamp is deleted
+
+If you are doing programing for while then you might know what is **cascade delete** code for this [here](https://github.com/vishnuk7/codecamps/commit/c1f9da4fee65b6b66a8a0d2d709fd4247278da23) for implementing cascade delete you create a middleware
+
+```javascript
+Model.findByIdAndDelete(id);
+```
+
+this is normal way you to use delete document from collection but there is one problem with this method 😕 you can't invoke the cascade middleware that we created.
+So how you are going to invoke the middleware for that refer [here](https://github.com/vishnuk7/codecamps/commit/0d1dd3985df137b9ea508980516a511b70cab602)
+
+```javascript
+const bootcamp = Model.findBy(id);
+bootcamp.remove(); //This invoke the middleware
+```
