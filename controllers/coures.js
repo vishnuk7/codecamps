@@ -53,7 +53,7 @@ exports.getCourse = asyncHandler(async (req, res, next) => {
 
 //@desc Add a course
 //@route POST /api/v1/codecamps/:codecampsId/courses
-//@access Public
+//@access Private
 
 exports.addCourse = asyncHandler(async (req, res, next) => {
   //adding bootcamp property into body object with the value codecampsId
@@ -69,6 +69,30 @@ exports.addCourse = asyncHandler(async (req, res, next) => {
   }
 
   const course = await Course.create(req.body);
+
+  res.status(200).json({
+    success: true,
+    data: course,
+  });
+});
+
+//@desc Update a course
+//@route POST /api/v1/courses/:id
+//@access Private
+exports.updateCourse = asyncHandler(async (req, res, next) => {
+  let course = await Course.findById(req.params.id);
+
+  if (!course) {
+    return next(
+      new ErrorResponese(`No course with the id of ${req.params.id}`),
+      400
+    );
+  }
+
+  course = await Course.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
 
   res.status(200).json({
     success: true,
