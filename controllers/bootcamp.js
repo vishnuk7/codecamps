@@ -87,9 +87,8 @@ exports.getCodecamps = asyncHandler(async (req, res, next) => {
 exports.getCodecamp = asyncHandler(async (req, res, next) => {
   const bootcamp = await Bootcamp.findById(req.params.id);
   if (!bootcamp) {
-    return new ErrorResponese(
-      `Bootcamp not found with id of ${req.params.id}`,
-      404
+    return next(
+      new ErrorResponese(`Bootcamp not found with id of ${req.params.id}`, 404)
     );
   }
   res.status(200).json({
