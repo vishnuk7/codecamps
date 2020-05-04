@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const chalk = require("chalk");
 
 const CourseSchema = new mongoose.Schema({
   title: {
@@ -13,6 +14,10 @@ const CourseSchema = new mongoose.Schema({
   weeks: {
     type: String,
     required: [true, "Pleas add a tution cost"],
+  },
+  tuition: {
+    type: Number,
+    required: [true, "Please add a tuition cost"],
   },
   minimumSkill: {
     type: String,
@@ -32,6 +37,41 @@ const CourseSchema = new mongoose.Schema({
     ref: "Bootcamp",
     required: true,
   },
+});
+
+//Static method to get avg of course tutions
+CourseSchema.statics.getAvergeCost = async function (bootcampId) {
+  console.log(chalk`{blue.inverse Calculating avg cost... }`);
+
+  const obj = await this.aggregate([
+    {
+      $match: { bootcamp: bootcampId },
+    },
+    {
+      $group: {
+        _id: "$bootcamp",
+        averageCost: { $avg: "$tuition" },
+      },
+    },
+  ]);
+
+  try {
+    await this.model("Bootcamp").findByIdAndUpdate(bootcampId, {
+      averageCost: Math.cell(obj[0].averageCost / 10) * 10,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//Call getAvergeCost after save
+CourseSchema.post("save", function () {
+  this.constructor.getAvergeCost(this.bootcamp);
+});
+
+//call getAvergeCost before remove
+CourseSchema.pre("save", function () {
+  this.constructor.getAvergeCost(this.bootcamp);
 });
 
 module.exports = mongoose.model("Course", CourseSchema);
