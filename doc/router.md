@@ -56,3 +56,9 @@ query = Model.find().populate({
 ```
 
 Can you guess what above code is doing?Yep! you are correct we are populating with specific fields
+
+#### Virtuals
+
+In Mongoose, a virtual is a property that is not stored in MongoDB. Virtuals are typically used for computed properties on documents.
+
+code for virtuals [here](https://github.com/vishnuk7/codecamps/commit/8f5c305bff284596f7d3f6447d9bcfaaad2a892b)
