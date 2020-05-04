@@ -27,7 +27,7 @@ const CourseSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  bootcamp: {
+  codecamp: {
     type: mongoose.Schema.ObjectId,
     ref: "Bootcamp",
     required: true,
