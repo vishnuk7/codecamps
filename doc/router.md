@@ -86,3 +86,20 @@ To view code 👉 [here](https://github.com/vishnuk7/codecamps/commit/c9c7b472e3
 For adding we are using this end `api/v1/codecamps/:codecampsId/courses`
 
 Inside bootcamps controller we are re-routing into course controler here we cand add if bootcamp exist otherwise it is going to give an error
+
+#### Update course
+
+To view code 👉 [here](https://github.com/vishnuk7/codecamps/commit/3d3c2f4a2f1a131489a9a2a90007b137b951bcae)
+
+For updating database we use a mongoose method which is know as `findByIdAndUpdate()`
+
+```javascript
+Model.findByIdAndUpdate("id", "data", {
+  new: true,
+  runValidators: true,
+});
+```
+
+In this method we pass id of **document**, **data** and some addtional properties and here we are passing two properties one is `new` with the value of `true` and another one is `runValidators` with the value of `true`.
+
+Now a question rise what these additional properties are doing **just google it**
