@@ -78,3 +78,11 @@ So how you are going to invoke the middleware for that refer [here](https://gith
 const bootcamp = Model.findBy(id);
 bootcamp.remove(); //This invoke the middleware
 ```
+
+#### Add course
+
+To view code 👉 [here](https://github.com/vishnuk7/codecamps/commit/c9c7b472e362d15f96f4df162b78f2a3851d7099)
+
+For adding we are using this end `api/v1/codecamps/:codecampsId/courses`
+
+Inside bootcamps controller we are re-routing into course controler here we cand add if bootcamp exist otherwise it is going to give an error
