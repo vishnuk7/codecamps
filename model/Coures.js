@@ -57,8 +57,9 @@ CourseSchema.statics.getAvergeCost = async function (bootcampId) {
 
   try {
     await this.model("Bootcamp").findByIdAndUpdate(bootcampId, {
-      averageCost: Math.cell(obj[0].averageCost / 10) * 10,
+      averageCost: Math.ceil(obj[0].averageCost / 10) * 10,
     });
+    console.log("updated");
   } catch (err) {
     console.log(err);
   }
