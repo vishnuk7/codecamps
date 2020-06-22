@@ -2,7 +2,6 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 const chalk = require("chalk");
 const dotenv = require("dotenv");
-const path = require("path");
 
 //Load env vars
 dotenv.config({ path: "./config/config.env" });
