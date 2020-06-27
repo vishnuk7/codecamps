@@ -3,7 +3,7 @@ const ErrorResponese = require("../util/errorResponse");
 const User = require("../model/User");
 
 //@desc Resgiter User
-//@route GET /api/v1/register
+//@route POST /api/v1/register
 //@access Public
 exports.register = asyncHandler(async (req, res, next) => {
   const { name, email, password, role } = req.body;
