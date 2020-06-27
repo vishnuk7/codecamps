@@ -9,24 +9,17 @@ const ErrorResponese = require("../util/errorResponse");
 //@access Public
 
 exports.getCourses = asyncHandler(async (req, res, next) => {
-  let query;
-
   if (req.params.codecampsId) {
-    query = Course.find({ bootcamp: req.params.codecampsId });
-  } else {
-    query = Course.find().populate({
-      path: "bootcamp",
-      select: "name description",
+    const courses = Course.find({ bootcamp: req.params.codecampsId });
+
+    res.status(200).json({
+      success: true,
+      count: courses.length,
+      data: courses,
     });
+  } else {
+    res.status(200).json(res.advanceResult);
   }
-
-  const coures = await query;
-
-  res.status(200).json({
-    success: true,
-    count: coures.length,
-    data: coures,
-  });
 });
 
 //@desc Get single course
