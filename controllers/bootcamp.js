@@ -32,6 +32,10 @@ exports.getCodecamp = asyncHandler(async (req, res, next) => {
 //@route POST /api/v1/codecamps/
 //@access Public
 exports.postCodecamp = asyncHandler(async (req, res, next) => {
+  //Only login user can add data into this
+  //So add user id into body
+  req.body.user = req.user.id;
+
   const bootcamp = await Bootcamp.create(req.body);
   res.status(201).json({
     success: true,
