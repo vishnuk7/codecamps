@@ -10,6 +10,7 @@ const connectDB = require("./config/db");
 //Route file
 const codecampsRouter = require("./routes/codecamps");
 const couresRouter = require("./routes/coures");
+const authRouter = require("./routes/auth");
 
 //load env vars
 dotenv.config({ path: "./config/config.env" });
@@ -36,6 +37,7 @@ app.use(express.static(path.join(__dirname, "public")));
 //mount routers
 app.use("/api/v1/codecamps", codecampsRouter);
 app.use("/api/v1/coures", couresRouter);
+app.use("/api/v1/auth", authRouter);
 
 app.use(errorHandler);
 const PORT = process.env.PORT || 5000;

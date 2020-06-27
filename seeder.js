@@ -28,11 +28,16 @@ const course = JSON.parse(
   fs.readFileSync(`${__dirname}/_data/courses.json`, "utf-8")
 );
 
+const user = JSON.parse(
+  fs.readFileSync(`${__dirname}/_data/users.json`, "utf-8")
+);
+
 // Importing into DB
 const importData = async () => {
   try {
     await Bootcamp.create(boocamps);
     await Course.create(course);
+    await User.create(user);
     console.log(chalk`{green Data Imported ...}`);
     process.exit();
   } catch (err) {
@@ -45,6 +50,7 @@ const deleteData = async () => {
   try {
     await Bootcamp.deleteMany();
     await Course.deleteMany();
+    await User.deleteMany();
     console.log(chalk`{red Data deleted... }`);
     process.exit();
   } catch (err) {
