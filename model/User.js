@@ -37,13 +37,14 @@ const UserSchema = new mongoose.Schema({
 });
 
 //Encrypte password using bcrypt
-UserSchema.pre("save", async (next) => {
-  const salt = await bcrypt.genSaltSync(10);
+UserSchema.pre("save", async function (next) {
+  console.log(this.password);
+  const salt = await bcrypt.genSalt(10);
   this.password = await bcrypt.hash(this.password, salt);
 });
 
 //Sign JWT token
-UserSchema.method.getSignedJwtToken = () => {
+UserSchema.methods.getSignedJwtToken = () => {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
