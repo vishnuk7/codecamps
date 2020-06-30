@@ -34,8 +34,8 @@ exports.getCodecamp = asyncHandler(async (req, res, next) => {
 exports.postCodecamp = asyncHandler(async (req, res, next) => {
   //Only login user can add data into this
   //So add user id into body
-  req.body.user = req.user.id;
-
+  req.body.user = req.user;
+  console.log(req.body.user);
   //Check for published bootcamp
   const publishedBootcamp = await Bootcamp.findOne({ user: req.user.id });
 
