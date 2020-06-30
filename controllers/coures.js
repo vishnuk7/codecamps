@@ -51,6 +51,7 @@ exports.getCourse = asyncHandler(async (req, res, next) => {
 exports.addCourse = asyncHandler(async (req, res, next) => {
   //adding bootcamp property into body object with the value codecampsId
   req.body.bootcamp = req.params.codecampsId;
+  req.body.user = req.user.id;
 
   const bootcamp = await Bootcamp.findById(req.params.codecampsId);
 
@@ -58,6 +59,19 @@ exports.addCourse = asyncHandler(async (req, res, next) => {
     return next(
       new ErrorResponese(`No bootcamp found with this id of ${req.params.id}`),
       404
+    );
+  }
+
+  //Check for published bootcamp
+  const publishedBootcamp = await Bootcamp.findOne({ user: req.user.id });
+
+  //If the user is not an admin, they can only add one bootcamp
+  if (publishedBootcamp && req.user.role !== "admin") {
+    return next(
+      new ErrorResponese(
+        `The user with ID ${req.user.id} has already publised a bootcamp`
+      ),
+      400
     );
   }
 
