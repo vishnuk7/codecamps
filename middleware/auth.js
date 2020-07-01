@@ -40,10 +40,12 @@ exports.protect = asyncHandler(async (req, res, next) => {
 exports.authorize = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
+      console.log("not admin");
       return next(
         new ErrorResponse(`User role ${req.user.role} is not authorized`, 403)
       );
     }
+    console.log("admin");
     next();
   };
 };
