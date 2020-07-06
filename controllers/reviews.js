@@ -35,10 +35,36 @@ exports.getReview = asyncHandler(async (req, res, next) => {
 
   if (!review) {
     return next(
-      new ErrorResponese(`No review found with id ${req.params.id}`),
-      404
+      new ErrorResponese(`No review found with id ${req.params.id}`, 404)
     );
   }
+
+  res.status(200).json({
+    success: true,
+    data: review,
+  });
+});
+
+//@desc Add review
+//@route POST /api/v1/codecamps/:codecampsId/reviews
+//@access Private
+
+exports.addReview = asyncHandler(async (req, res, next) => {
+  req.body.bootcamp = req.params.codecampsId;
+  req.body.user = req.user.id;
+
+  const bootcamps = await Bootcamp.findById(req.params.codecampsId);
+
+  if (!bootcamps) {
+    return next(
+      new ErrorResponese(
+        `No bootcamps found with id of ${req.params.codecampsId}`,
+        404
+      )
+    );
+  }
+
+  const review = Review.create(req.body);
 
   res.status(200).json({
     success: true,
