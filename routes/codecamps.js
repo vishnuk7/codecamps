@@ -18,6 +18,7 @@ const { protect, authorize } = require("../middleware/auth");
 
 //Include other resource routers
 const courseRouter = require("./coures");
+const reviewRouter = require("./reviews"); //Forwarded to the review router
 
 const router = express.Router();
 
@@ -43,5 +44,6 @@ router
 
 //Re-route into other resource routers
 router.use("/:codecampsId/courses", courseRouter);
+router.use("/:codecampsId/reviews", reviewRouter);
 
 module.exports = router;
